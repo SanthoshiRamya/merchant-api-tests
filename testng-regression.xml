@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="InterviewTests">
+   
+   
+    <parameter name="BaseURI" value="http://qainterview.merchante-solutions.com:3030/"/>
+   
+
+     <test name="userTests">
+        <classes>
+            <class name="com.merchant.api.tests.UserTest">
+                <methods>
+                    <include name="createUser"/>
+                    <include name="getUser"/>
+                    <include name="updateUser"/>
+                </methods>
+            </class>
+        </classes>
+ 
+    </test>    
+
+
+    <test name="postTests">
+        <classes>
+            <class name="com.merchant.api.tests.PostTest">
+                <methods>
+                    <include name="createPost"/>
+                   <include name="getPost"/>  
+                    <include name="updatePost"/>                      
+                </methods>
+            </class>
+        </classes>
+    </test> 
+    
+    
+    <test name="commentTests">
+        <classes>
+            <class name="com.merchant.api.tests.CommentTest">
+                <methods>
+                    <include name="createComment"/>
+                    <include name="getComment"/>
+                    <include name="updateComment"/>  
+                </methods>
+            </class>
+        </classes>
+    </test>    
+     
+</suite>
