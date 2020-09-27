@@ -2,9 +2,6 @@ package com.merchant.api.tests;
 
 import static io.restassured.RestAssured.given;
 
-import java.time.Instant;
-
-import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,9 +12,6 @@ import com.merchant.api.data.User;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
-
-
-
 public class UserTest extends TestBase {
 	
 	private User user;
@@ -27,13 +21,14 @@ public class UserTest extends TestBase {
         RestAssured.basePath = "/users";
 
         user = RandomDataGenerator.getUser();
+        
 	}
 
 	@Test
 	public void createUser() {
 
 		ObjectCreatorService.createUser(user);
-		Reporter.log("user id = " + true);
+		Reporter.log("Created a new user = " + user.getId());
 	}
 	
 	@Test(dependsOnMethods = "createUser")
@@ -44,7 +39,7 @@ public class UserTest extends TestBase {
 				statusCode(200).
 				spec(user.getUserSpec());
 
-		Reporter.log("user id = " + true);
+		Reporter.log("User = " + user.toString());
 	}
 	
 	
@@ -58,8 +53,9 @@ public class UserTest extends TestBase {
 				spec(user.getUserSpec()).extract().
                 path("id").toString();
 
-		Reporter.log("user id = " + true);
+		Reporter.log("Updated user name = " + user.getFirstName());
 	}
+	
 	
 
 }

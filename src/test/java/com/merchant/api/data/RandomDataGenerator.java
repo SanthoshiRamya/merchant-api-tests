@@ -1,31 +1,24 @@
 package com.merchant.api.data;
 
-import java.time.Instant;
-import java.util.concurrent.atomic.AtomicLong;
+import com.github.javafaker.Faker;
 
 public class RandomDataGenerator {
-	
-	private static final AtomicLong seedLong = new AtomicLong(Instant.now().toEpochMilli());
+		
+	private static final Faker faker = new Faker();	
+
 
 	public static User getUser() {
-		long id = seedLong.incrementAndGet();
-		User user = new User("user" + id, "first" + id, "last" + id);
-		return user;
+		return new User(faker.superhero().prefix() + faker.name().firstName() + faker.address().buildingNumber(),
+				faker.name().firstName(), faker.name().lastName());
+		
 	}
 
 	public static Post getPost(User user) {
-		long id = seedLong.incrementAndGet();
-		Post post = new Post(user.getId(), "title " + id, "body " + id);
-		return post;
+		return new Post(user.getId(), faker.lorem().sentence(), faker.lorem().sentence());
 	}
 
 	public static Comment getComment(User user, Post post) {
-		long id = seedLong.incrementAndGet();
-		Comment comment = new Comment(post.getId(), user.getId(), "body " + id);
-		return comment;
+		return new Comment(post.getId(), user.getId(), faker.lorem().sentence());
 	}
 
-	private synchronized static String getId() {
-		return String.valueOf(Instant.now().toEpochMilli());
-	}
 }

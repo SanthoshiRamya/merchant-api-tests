@@ -40,8 +40,10 @@ public class PostTest extends TestBase {
 
 	@Test(dependsOnMethods = "createPost")
 	public void updatePost() {
+		post.setBody("Update Post");
 		given().accept(ContentType.JSON).contentType(ContentType.JSON).body(post).when().put("/" + post.getId()).then()
 				.statusCode(200).spec(post.getPostSpec()).extract().path("id").toString();
+		//Reporter.log("Updated post" + );
 	}
 	
 
